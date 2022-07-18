@@ -29,9 +29,9 @@ function renderAnswers(){
         let answer = whichanswer[i - 1];
         let card = getElmById(`card${i}`);
         card.innerHTML = `
-        <span onclick="checkIfAnswerRight(${i}, 'card${i}')"> 
+        <div class="answer-text" onclick="checkIfAnswerRight(${i}, 'card${i}')"> 
              ${answer}
-        </span>
+        </div>
     `;
     }
 }
@@ -46,11 +46,31 @@ function getElmById(id){
     return document.getElementById(id);
 }
 
-function checkIfAnswerRight(numberOfRightAnswer, id){
+function checkIfAnswerRight(choseAnswer, id){
+    document.getElementById('overlay-container').classList.remove('d-none');
     changeColorOfDiv = getElmById(id);
-    if (numberOfRightAnswer == questions[questionCounter].right_answer){
-        changeColorOfDiv.classList.add('bg-right');
+    let rightAnswer = questions[questionCounter].right_answer;
+    if (choseAnswer == rightAnswer){
+        changeColorOfDiv.parentNode.classList.add('bg-right');
     } else {
-        changeColorOfDiv.classList.add('bg-false');
+        changeColorOfDiv.parentNode.classList.add('bg-false');
+        document.getElementById(`card${rightAnswer}`).parentNode.classList.add('bg-right');
+    }
+    document.getElementById('nextQuestion-btn').disabled = false;
+}
+
+function nextQuestion(){
+    addAndRemoveClasses();
+    iamountOfQuestions++;
+    questionCounter++;
+    init();
+}
+
+function addAndRemoveClasses(){
+    document.getElementById('nextQuestion-btn').disabled = true;
+    document.getElementById('overlay-container').classList.add('d-none');
+    for (let i = 1; i < 5; i++) {
+        document.getElementById(`card${i}`).parentNode.classList.remove('bg-right');
+        document.getElementById(`card${i}`).parentNode.classList.remove('bg-false');
     }
 }

@@ -34,35 +34,37 @@
                 <img src="img/questionmark.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 id="question-id">Frage</h5>
-                    <div class="card q-box">
-                        <div id="card1" class="card-body">
-                            This is some text within a card body.
+                    <div class="answer-container">
+                        <div id="overlay-container" class="sub-answer-container d-none"></div>
+                        <div class="card q-box bg-selection">
+                            <div id="card1" class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
+                        <div class="card q-box bg-selection">
+                            <div id="card2" class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
+                        <div class="card q-box bg-selection">
+                            <div id="card3" class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
+                        <div class="card q-box bg-selection">
+                            <div id="card4" class="card-body">
+                                This is some text within a card body.
+                            </div>
                         </div>
                     </div>
-
-                    <div class="card q-box">
-                        <div id="card2" class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div>
-
-                    <div class="card q-box">
-                        <div id="card3" class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div>
-
-                    <div class="card q-box">
-                        <div id="card4" class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div>
-
                     <div class="card-footer">
                         <span class="howmanyquestions">
                             <p id="allquestions"></p>
                         </span>
-                        <button class="btn btn-primary">Nächste Frage</button>
+                        <button id="nextQuestion-btn" class="btn btn-primary" onclick="nextQuestion()" disabled>Nächste Frage</button>
                     </div>
                 </div>
             </div>

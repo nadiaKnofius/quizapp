@@ -62,9 +62,32 @@
 }
 
 .bg-right{
-    background-color: rgb(108, 187, 4);
+    background-color: rgb(108, 187, 4) !important;
 }
 
 .bg-false{
-    background-color: rgb(221, 130, 130);
+    background-color: rgb(221, 130, 130) !important;
+}
+
+.answer-text{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.bg-selection:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.answer-container{
+    position: relative;
+}
+
+.sub-answer-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
 }

@@ -1,14 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizapp</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="script.js"></script>
+    <script src="quiz.js"></script>
 </head>
-<body>
-    
+
+<body onload="init()">
+
+    <div class="card-container">
+
+        <div class="sidebox">
+            <div class="sidebar-logo">
+                <img src="img/logo.png" alt="">
+            </div>
+            <nav class="nav flex-column">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link disabled">Disabled</a>
+            </nav>
+        </div>
+
+
+        <div class="card-sub-sontainer">
+            <div class="card card-height">
+                <img src="img/questionmark.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 id="question-id">Frage</h5>
+                    <div class="card q-box">
+                        <div id="card1" class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+
+                    <div class="card q-box">
+                        <div id="card2" class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+
+                    <div class="card q-box">
+                        <div id="card3" class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+
+                    <div class="card q-box">
+                        <div id="card4" class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="howmanyquestions">
+                            <p id="allquestions"></p>
+                        </span>
+                        <button class="btn btn-primary">Nächste Frage</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
 </body>
+
 </html>

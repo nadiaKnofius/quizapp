@@ -1,0 +1,62 @@
+.navbar{
+    height: 100px !important;
+}
+
+.card-container{
+    min-height: 100vh;
+    display: flex;   
+}
+
+.card{
+    width: 25rem;
+}
+
+.card-height{
+    min-height: 610px;
+}
+
+.card-sub-sontainer{
+    width: 80%;
+    background-image: url('img/question-mark-bg2.jpg');
+    background-position: right;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+    background-color: white !important;
+    margin-top: 15px;
+}
+
+.q-box{
+    width: 100%;
+}
+
+.howmanyquestions{
+    display: flex;
+    align-items: center;
+}
+
+.howmanyquestions p{
+    margin-bottom: 0;
+}
+
+.sidebox{ 
+    background-color: #212529;
+    width: 20%;
+}
+
+.sidebar-logo{
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-none{
+    display: none;
+}

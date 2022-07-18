@@ -60,3 +60,11 @@
 .d-none{
     display: none;
 }
+
+.bg-right{
+    background-color: rgb(108, 187, 4);
+}
+
+.bg-false{
+    background-color: rgb(221, 130, 130);
+}

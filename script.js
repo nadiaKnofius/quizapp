@@ -1,6 +1,7 @@
 
 let iamountOfQuestions = 1;
 let questionCounter = 0;
+let rightAnswerCounter = 0;
 
 function init(){
     let currentQuestion = fincOutCurrentQuestion();
@@ -52,6 +53,7 @@ function checkIfAnswerRight(choseAnswer, id){
     let rightAnswer = questions[questionCounter].right_answer;
     if (choseAnswer == rightAnswer){
         changeColorOfDiv.parentNode.classList.add('bg-right');
+        rightAnswerCounter++;
     } else {
         changeColorOfDiv.parentNode.classList.add('bg-false');
         document.getElementById(`card${rightAnswer}`).parentNode.classList.add('bg-right');
@@ -63,7 +65,13 @@ function nextQuestion(){
     addAndRemoveClasses();
     iamountOfQuestions++;
     questionCounter++;
-    init();
+    if(checkIfLastQuestion(iamountOfQuestions)){
+        console.log('Quiz ist beendet');
+        console.log(`Du hast ${rightAnswerCounter} von ${questions.length} Fragen richtig beantwortet`);
+    }else{
+        init();
+    }
+    
 }
 
 function addAndRemoveClasses(){
@@ -72,5 +80,13 @@ function addAndRemoveClasses(){
     for (let i = 1; i < 5; i++) {
         document.getElementById(`card${i}`).parentNode.classList.remove('bg-right');
         document.getElementById(`card${i}`).parentNode.classList.remove('bg-false');
+    }
+}
+
+function checkIfLastQuestion(iamountOfQuestions){
+    if (iamountOfQuestions -1 == questions.length){
+        return true;
+    }else{
+        return false;
     }
 }

@@ -66,12 +66,10 @@ function nextQuestion(){
     iamountOfQuestions++;
     questionCounter++;
     if(checkIfLastQuestion(iamountOfQuestions)){
-        console.log('Quiz ist beendet');
-        console.log(`Du hast ${rightAnswerCounter} von ${questions.length} Fragen richtig beantwortet`);
+        showQuizOver();
     }else{
         init();
-    }
-    
+    }  
 }
 
 function addAndRemoveClasses(){
@@ -89,4 +87,20 @@ function checkIfLastQuestion(iamountOfQuestions){
     }else{
         return false;
     }
+}
+
+function showQuizOver(){
+    document.getElementById('question-id').innerHTML = 'Das Quiz ist beendet';
+    document.getElementById('allquestions').innerHTML = `Du hast <b>${rightAnswerCounter}</b> von <b>${questions.length}</b> Fragen richtig beantwortet`;
+    document.getElementById('nextQuestion-btn').classList.add('d-none');
+    let overlay = document.getElementById('overlay-container');
+    overlay.innerHTML = showQuizOverTemplate();
+    overlay.classList.remove('d-none');
+    overlay.classList.add('overlay-endofquiz');
+}
+
+function showQuizOverTemplate(){
+    return `
+        <img src="img/trophy.jpg" alt="Bild einer Trophäe">
+`;
 }

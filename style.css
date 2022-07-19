@@ -11,6 +11,10 @@
     width: 25rem;
 }
 
+h5{
+    text-align: center;
+}
+
 .card-height{
     min-height: 610px;
 }
@@ -90,4 +94,24 @@
     right: 0;
     bottom: 0;
     z-index: 100;
+}
+
+.white-color{
+    color: white;
+}
+
+#overlay-container img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+
+.overlay-endofquiz{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }

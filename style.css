@@ -47,6 +47,7 @@ h5{
 
 .howmanyquestions p{
     margin-bottom: 0;
+    text-align: center;
 }
 
 .sidebox{ 
@@ -125,6 +126,11 @@ h5{
 
 .btn-primary:hover{
     background-color: #e29156 !important;
+}
+
+.btn-play-again{
+    height: 36px;
+    width: 125px;
 }
 
 .m-10{

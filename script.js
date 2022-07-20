@@ -105,6 +105,7 @@ function showQuizOver(){
     document.getElementById('question-id').innerHTML = 'Das Quiz ist beendet';
     document.getElementById('allquestions').innerHTML = `Du hast <b>${rightAnswerCounter}</b> von <b>${questions.length}</b> Fragen richtig beantwortet`;
     document.getElementById('nextQuestion-btn').classList.add('d-none');
+    document.getElementById('play-again-btn').classList.remove('d-none');
     let overlay = document.getElementById('overlay-container');
     overlay.innerHTML = showQuizOverTemplate();
     overlay.classList.remove('d-none');
@@ -118,6 +119,7 @@ function showQuizOverTemplate(){
 }
 
 
+// Progress bar
 function calcProgressBar(){
     let questionsDone = iamountOfQuestions - 1;
     let result = (questionsDone * 100) / questions.length;
@@ -129,4 +131,19 @@ function showUpdatedProgressBar(result){
     document.getElementById('progress-bar').innerHTML = `
     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${result}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> ${result}%</div>
     `;
+}
+
+function playAgain(){
+    iamountOfQuestions = 1;
+    questionCounter = 0;
+    rightAnswerCounter = 0;
+    document.getElementById('play-again-btn').classList.add('d-none');
+    document.getElementById('nextQuestion-btn').classList.remove('d-none');
+    document.getElementById('nextQuestion-btn').innerHTML = "Nächste Frage";
+    let overlay = document.getElementById('overlay-container');
+    overlay.classList.add('d-none');
+    overlay.classList.remove('overlay-endofquiz');
+    overlay.innerHTML = '';
+    init();
+    calcProgressBar();
 }

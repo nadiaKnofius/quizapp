@@ -1,4 +1,4 @@
-let questions = [
+let informatik = [
     {
         "question": "Von welcher Firma nahm Steve Jobs die Idee für die grafische Benutzeroberfläche mit einer Maus?",
         "answer_1": "Xerox",
@@ -54,3 +54,69 @@ let questions = [
     }
     
     ];
+
+    let questions = [
+        {
+            "question": "Which of the following values aren't falsy?",
+            "answer_1": "NaN",
+            "answer_2": "null",
+            "answer_3": "undefined",
+            "answer_4": "{}",
+            "right_answer": 4
+        },
+        
+        {
+            "question": "Which of the following is a server-side Java Script object?",
+            "answer_1": "Function",
+            "answer_2": "File",
+            "answer_3": "FileUpload",
+            "answer_4": "Date",
+            "right_answer": 3
+        },
+        
+        {
+            "question": "To insert a JavaScript into an HTML page, which tag is used?",
+            "answer_1": "'<script=â€™javaâ€™>'",
+            "answer_2": "'<javascript>'",
+            "answer_3": "'<script>'",
+            "answer_4": "'<js>'",
+            "right_answer": 3
+        },
+        
+        {
+            "question": "Which of the below is used in Java script to insert special characters?",
+            "answer_1": "'&'",
+            "answer_2": "'\'",
+            "answer_3": "'-'",
+            "answer_4": "'%'",
+            "right_answer": 4
+        },
+        
+        {
+            "question": "How does Java Script store dates in objects of Date type?",
+            "answer_1": "The number of days since January 1st, 1900",
+            "answer_2": "The number of seconds since January 1st, 1970",
+            "answer_3": "The number of milliseconds since January 1st, 1970",
+            "answer_4": "The number of picoseconds since January 1st, 1970",
+            "right_answer": 1
+        },
+        
+        {
+            "question": " Which is the correct way to write a JavaScript array?",
+            "answer_1": "let  txt = new Array(1:'arr',2:'kim',3:'jim')",
+            "answer_2": "let txt = new Array:1=(' arr ')2=('kim')3=('jim')",
+            "answer_3": "let txt = new Array('arr ','kim','jim')",
+            "answer_4": "txt = new Array='arr','kim','jim'",
+            "right_answer": 4
+        },
+
+        {
+            "question": "Which of the following is the tainted property of a window object in Java Script?",
+            "answer_1": "Host",
+            "answer_2": "Defaultstatus",
+            "answer_3": "Protocol",
+            "answer_4": "Pathname",
+            "right_answer": 2
+        }
+        
+        ];

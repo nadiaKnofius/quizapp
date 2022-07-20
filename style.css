@@ -136,3 +136,7 @@ h5{
 .m-10{
    margin: 10px;
 }
+
+.flex-column{
+    align-items: center;
+}

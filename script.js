@@ -3,24 +3,26 @@ let iamountOfQuestions = 1;
 let questionCounter = 0;
 let rightAnswerCounter = 0;
 
+let audio_wrong = new Audio('sounds/wrong.mp3');
+let audio_correct = new Audio('sounds/correct.wav');
+let audio_end = new Audio('sounds/end.wav');
+
 function init(){
     let currentQuestion = fincOutCurrentQuestion();
     let question = getElmById('question-id');
     renderQuestionInHTML(question, currentQuestion); // question
     renderAnswers(); // answer
-    let amountOfQuestions = getElmById('allquestions'); // footer
-    amountOfQuestions.innerHTML = renderFooterOfCard();
-
-}
-
-
-function renderQuestionInHTML(question, currentQuestion){
-    question.innerHTML = `${currentQuestion}`;
+    renderFooterOfCard();
 }
 
 
 function fincOutCurrentQuestion(){
     return questions[questionCounter]['question'];
+}
+
+
+function renderQuestionInHTML(question, currentQuestion){
+    question.innerHTML = `${currentQuestion}`;
 }
 
 
@@ -37,8 +39,10 @@ function renderAnswers(){
     }
 }
 
+
 function renderFooterOfCard(){
-    return `
+    let amountOfQuestions = getElmById('allquestions');
+    amountOfQuestions.innerHTML = `
     Frage <b>${iamountOfQuestions}</b> von <b>${questions.length}</b>`;
 }
 
@@ -47,6 +51,7 @@ function getElmById(id){
     return document.getElementById(id);
 }
 
+
 function checkIfAnswerRight(choseAnswer, id){
     document.getElementById('overlay-container').classList.remove('d-none');
     changeColorOfDiv = getElmById(id);
@@ -54,9 +59,11 @@ function checkIfAnswerRight(choseAnswer, id){
     if (choseAnswer == rightAnswer){
         changeColorOfDiv.parentNode.classList.add('bg-right');
         rightAnswerCounter++;
+        audio_correct.play();
     } else {
         changeColorOfDiv.parentNode.classList.add('bg-false');
         document.getElementById(`card${rightAnswer}`).parentNode.classList.add('bg-right');
+        audio_wrong.play();
     }
     document.getElementById('nextQuestion-btn').disabled = false;
 }
@@ -110,6 +117,7 @@ function showQuizOver(){
     overlay.innerHTML = showQuizOverTemplate();
     overlay.classList.remove('d-none');
     overlay.classList.add('overlay-endofquiz');
+    audio_end.play();
 }
 
 function showQuizOverTemplate(){
@@ -132,6 +140,7 @@ function showUpdatedProgressBar(result){
     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${result}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> ${result}%</div>
     `;
 }
+
 
 function playAgain(){
     iamountOfQuestions = 1;

@@ -30,7 +30,7 @@ function renderAnswers(){
         let answer = whichanswer[i - 1];
         let card = getElmById(`card${i}`);
         card.innerHTML = `
-        <div class="answer-text" onclick="checkIfAnswerRight(${i}, 'card${i}')"> 
+        <div class="answer-text card-body" onclick="checkIfAnswerRight(${i}, 'card${i}')"> 
              ${answer}
         </div>
     `;
@@ -65,11 +65,15 @@ function nextQuestion(){
     addAndRemoveClasses();
     iamountOfQuestions++;
     questionCounter++;
-    if(checkIfLastQuestion(iamountOfQuestions)){
-        showQuizOver();
-    }else{
+    if(checkIfNextToLastQuestion(iamountOfQuestions)){
+       document.getElementById('nextQuestion-btn').innerHTML = "Quiz abschließen"; 
+       init();
+    }else if(checkIfLastQuestion(iamountOfQuestions)){
+        showQuizOver(); 
+    } else {
         init();
-    }  
+    }
+    calcProgressBar();
 }
 
 function addAndRemoveClasses(){
@@ -83,6 +87,14 @@ function addAndRemoveClasses(){
 
 function checkIfLastQuestion(iamountOfQuestions){
     if (iamountOfQuestions -1 == questions.length){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function checkIfNextToLastQuestion(iamountOfQuestions){
+    if (iamountOfQuestions == questions.length){
         return true;
     }else{
         return false;
@@ -103,4 +115,18 @@ function showQuizOverTemplate(){
     return `
         <img src="img/trophy.jpg" alt="Bild einer Trophäe">
 `;
+}
+
+
+function calcProgressBar(){
+    let questionsDone = iamountOfQuestions - 1;
+    let result = (questionsDone * 100) / questions.length;
+    result = parseInt(result);
+    showUpdatedProgressBar(result);
+}
+
+function showUpdatedProgressBar(result){
+    document.getElementById('progress-bar').innerHTML = `
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${result}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> ${result}%</div>
+    `;
 }

@@ -107,11 +107,26 @@ h5{
     border-radius: 50%;
 }
 
-
-
 .overlay-endofquiz{
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+}
+
+.progress-bar{
+    background-color: #dd6611 !important;
+}
+
+.btn-primary{
+    background-color: #dd6611 !important;
+    border: none !important;
+}
+
+.btn-primary:hover{
+    background-color: #e29156 !important;
+}
+
+.m-10{
+   margin: 10px;
 }

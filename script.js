@@ -1,4 +1,3 @@
-
 let iamountOfQuestions = 1;
 let questionCounter = 0;
 let rightAnswerCounter = 0;
@@ -7,17 +6,21 @@ let audio_wrong = new Audio('sounds/wrong.mp3');
 let audio_correct = new Audio('sounds/correct.wav');
 let audio_end = new Audio('sounds/end.wav');
 
-function init(){
-    let currentQuestion = fincOutCurrentQuestion();
+function init(j){
+    if(!j){
+        j = 0;
+    }
+    let currentQuestion = fincOutCurrentQuestion(j);
     let question = getElmById('question-id');
-    renderQuestionInHTML(question, currentQuestion); // question
-    renderAnswers(); // answer
-    renderFooterOfCard();
+    renderQuestionInHTML(question, currentQuestion);
+    renderAnswers(j); 
+    renderFooterOfCard(j); 
+    createBtn(j);
 }
 
 
-function fincOutCurrentQuestion(){
-    return questions[questionCounter]['question'];
+function fincOutCurrentQuestion(j){
+    return questions[j].quiz[questionCounter]['question'];
 }
 
 
@@ -26,13 +29,13 @@ function renderQuestionInHTML(question, currentQuestion){
 }
 
 
-function renderAnswers(){
+function renderAnswers(j){
     for (let i = 1; i < 5; i++) {
-        let whichanswer = [questions[questionCounter].answer_1, questions[questionCounter].answer_2, questions[questionCounter].answer_3, questions[questionCounter].answer_4]
+        let whichanswer = [questions[j].quiz[questionCounter].answer_1, questions[j].quiz[questionCounter].answer_2, questions[j].quiz[questionCounter].answer_3, questions[j].quiz[questionCounter].answer_4];
         let answer = whichanswer[i - 1];
         let card = getElmById(`card${i}`);
         card.innerHTML = `
-        <div class="answer-text card-body" onclick="checkIfAnswerRight(${i}, 'card${i}')"> 
+        <div class="answer-text card-body" onclick="checkIfAnswerRight(${i}, 'card${i}', ${j})"> 
              ${answer}
         </div>
     `;
@@ -40,10 +43,18 @@ function renderAnswers(){
 }
 
 
-function renderFooterOfCard(){
+function renderFooterOfCard(j){
     let amountOfQuestions = getElmById('allquestions');
     amountOfQuestions.innerHTML = `
-    Frage <b>${iamountOfQuestions}</b> von <b>${questions.length}</b>`;
+    Frage <b>${iamountOfQuestions}</b> von <b>${questions[j].quiz.length}</b>`;
+}
+
+
+function createBtn(j){
+    document.getElementById('next-btn-container').innerHTML = `
+    <button id="nextQuestion-btn" class="btn btn-primary" onclick="nextQuestion(${j})" disabled>Nächste Frage</button>
+    <button id="play-again-btn" class="btn btn-primary d-none btn-play-again" onclick="playAgain(${j})">erneut spielen</button>
+    `;
 }
 
 
@@ -52,10 +63,10 @@ function getElmById(id){
 }
 
 
-function checkIfAnswerRight(choseAnswer, id){
+function checkIfAnswerRight(choseAnswer, id, j){
     document.getElementById('overlay-container').classList.remove('d-none');
     changeColorOfDiv = getElmById(id);
-    let rightAnswer = questions[questionCounter].right_answer;
+    let rightAnswer = questions[j].quiz[questionCounter].right_answer;
     if (choseAnswer == rightAnswer){
         changeColorOfDiv.parentNode.classList.add('bg-right');
         rightAnswerCounter++;
@@ -68,19 +79,19 @@ function checkIfAnswerRight(choseAnswer, id){
     document.getElementById('nextQuestion-btn').disabled = false;
 }
 
-function nextQuestion(){
+function nextQuestion(j){
     addAndRemoveClasses();
     iamountOfQuestions++;
     questionCounter++;
-    if(checkIfNextToLastQuestion(iamountOfQuestions)){
+    if(checkIfNextToLastQuestion(iamountOfQuestions, j)){
        document.getElementById('nextQuestion-btn').innerHTML = "Quiz abschließen"; 
-       init();
-    }else if(checkIfLastQuestion(iamountOfQuestions)){
-        showQuizOver(); 
+       init(j);
+    }else if(checkIfLastQuestion(iamountOfQuestions, j)){
+        showQuizOver(j); 
     } else {
-        init();
+        init(j);
     }
-    calcProgressBar();
+    calcProgressBar(j);
 }
 
 function addAndRemoveClasses(){
@@ -92,28 +103,30 @@ function addAndRemoveClasses(){
     }
 }
 
-function checkIfLastQuestion(iamountOfQuestions){
-    if (iamountOfQuestions -1 == questions.length){
+function checkIfLastQuestion(iamountOfQuestions, j){
+    if (iamountOfQuestions -1 == questions[j].quiz.length){
         return true;
     }else{
         return false;
     }
 }
 
-function checkIfNextToLastQuestion(iamountOfQuestions){
-    if (iamountOfQuestions == questions.length){
+function checkIfNextToLastQuestion(iamountOfQuestions, j){
+    if (iamountOfQuestions == questions[j].quiz.length){
         return true;
     }else{
         return false;
     }
 }
 
-function showQuizOver(){
+
+//shows endScreen
+function showQuizOver(j){
+    let overlay = document.getElementById('overlay-container');
     document.getElementById('question-id').innerHTML = 'Das Quiz ist beendet';
-    document.getElementById('allquestions').innerHTML = `Du hast <b>${rightAnswerCounter}</b> von <b>${questions.length}</b> Fragen richtig beantwortet`;
+    document.getElementById('allquestions').innerHTML = `Du hast <b>${rightAnswerCounter}</b> von <b>${questions[j].quiz.length}</b> Fragen richtig beantwortet`;
     document.getElementById('nextQuestion-btn').classList.add('d-none');
     document.getElementById('play-again-btn').classList.remove('d-none');
-    let overlay = document.getElementById('overlay-container');
     overlay.innerHTML = showQuizOverTemplate();
     overlay.classList.remove('d-none');
     overlay.classList.add('overlay-endofquiz');
@@ -128,21 +141,22 @@ function showQuizOverTemplate(){
 
 
 // Progress bar
-function calcProgressBar(){
+function calcProgressBar(j){
     let questionsDone = iamountOfQuestions - 1;
-    let result = (questionsDone * 100) / questions.length;
+    let result = (questionsDone * 100) / questions[j].quiz.length;
     result = parseInt(result);
     showUpdatedProgressBar(result);
 }
 
 function showUpdatedProgressBar(result){
     document.getElementById('progress-bar').innerHTML = `
-    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${result}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> ${result}%</div>
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${result}%" 
+    aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> ${result}%</div>
     `;
 }
 
 
-function playAgain(){
+function playAgain(j, id){
     iamountOfQuestions = 1;
     questionCounter = 0;
     rightAnswerCounter = 0;
@@ -153,6 +167,20 @@ function playAgain(){
     overlay.classList.add('d-none');
     overlay.classList.remove('overlay-endofquiz');
     overlay.innerHTML = '';
-    init();
-    calcProgressBar();
+    init(j);
+    calcProgressBar(j);
+    changeBorder(id);
+}
+
+
+function changeBorder(id){
+    id = document.getElementById(id);
+    for (let i = 1; i < 4; i++) {
+        let navId = document.getElementById(`nav${i}`);
+        navId.classList.remove('border-orange');
+        navId.classList.add('border-transparent');
+    }
+    id.classList.remove('border-transparent');
+    id.classList.add('border-orange');
+
 }

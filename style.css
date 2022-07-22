@@ -1,3 +1,8 @@
+body{
+    font-family: 'Rubik', sans-serif !important;
+}
+
+
 .navbar{
     height: 100px !important;
 }
@@ -60,6 +65,24 @@ h5{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.nav-link{
+   color: #dd6611 !important;
+   font-weight: bold;
+   width: 120px;
+}
+
+.nav-link:hover{
+    border-left: #dd6611 solid 2px;
+}
+
+.border-orange{
+    border-left: #dd6611 solid 2px !important;
+}
+
+.border-transparent{
+    border-left: transparent solid 2px;
 }
 
 .d-none{
@@ -129,7 +152,7 @@ h5{
 }
 
 .btn-play-again{
-    height: 36px;
+    min-height: 36px;
     width: 125px;
 }
 
@@ -140,3 +163,48 @@ h5{
 .flex-column{
     align-items: center;
 }
+
+
+@media (max-width: 550px){
+    .sidebox{ 
+        display: none;
+    }
+
+    .card-sub-sontainer{
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 410px){
+    .card{
+        width: 100%;
+    }
+
+    #allquestions{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 320px){
+    h5{
+        font-size: 1rem !important;
+    }
+    .answer-text {
+        font-size: 0.9rem;
+    }   
+
+    .card-body{
+        padding: 0.5rem 0.5rem;
+    }
+
+    #allquestions{
+        font-size: 12px;
+    }
+
+    .btn-primary{
+        font-size: 13px !important;
+        width: 100px;
+        height: 50px !important;
+    }
+}   
